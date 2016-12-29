@@ -2,6 +2,8 @@
 
 const net = require('net');
 
+const htmlContent = require('./htmlexports.js');
+
 let server = net.createServer((socket) => {
 
   socket.on('data', (chunk) => {
