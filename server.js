@@ -2,25 +2,20 @@
 
 const net = require('net');
 
-let messageCount = 0;
-let  header = {
-  Server: 'test server',
-  Date: 'test date',
-  ContentType: 'test contenttype',
-  ContentLength: 'test ContentLength',
-  Connection: 'test Connection'
-};
-console.log(header);
+let server = net.createServer((socket) => {
 
-let server = net.createServer((server) => {
+  socket.on('data', (chunk) => {
+    socket.write('Server: This is the server, right?\n Date: Thu, 29 Dec 2016 07:01:28 GMT\n Accept: text/html, application/json');
+    socket.end();
 
-  server.on('data', (chunk) => {
-    messageCount++;
+    /*messageCount++;
     console.log(`Client: ${chunk}`);
-    process.stdin.pipe(server);
+    process.stdin.pipe(server);*/
 
   });
 });
+
+
 
 server.listen(8080, '0.0.0.0',  () => {
   console.log('opened server on ', server.address());
