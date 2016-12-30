@@ -3,16 +3,18 @@
 const net = require('net');
 
 const htmlContent = require('./htmlexports.js');
-
+console.log(htmlContent);
 let server = net.createServer((socket) => {
-
+  socket.setEncoding('utf8');
   socket.on('data', (chunk) => {
     socket.write('Server: This is the server, right?\n Date: Thu, 29 Dec 2016 07:01:28 GMT\n Accept: text/html, application/json');
-    socket.end();
+    console.log(chunk);
 
-    /*messageCount++;
-    console.log(`Client: ${chunk}`);
-    process.stdin.pipe(server);*/
+
+/*    socket.on('data', function (chunk) {
+      console.log(chunk);
+    });
+*/    socket.end();
 
   });
 });
