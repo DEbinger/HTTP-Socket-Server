@@ -7,9 +7,7 @@ const htmlContent = require('./htmlexports.js');
 let server = net.createServer((socket) => {
   socket.setEncoding('utf8');
   socket.on('data', (chunk) => {
-    socket.write('Server: This is the server, right?\n Date: Thu, 29 Dec 2016 07:01:28 GMT\n Accept: text/html, application/json');
-    console.log(chunk);
-
+    //let timeStamp = '';
     	let request = chunk.split(' ');
     	// console.log(request);
     	let requestor = request[1];
@@ -17,14 +15,15 @@ let server = net.createServer((socket) => {
 
     	switch(requestor){
     		case "/404.html":
-    		socket.write(htmlContent._404_html);
+    		socket.write(`'Server: This is the server, right?\n Date: Thu, 29 Dec 2016 07:01:28 GMT\n Accept: text/html, application/json'
+          ${htmlContent._404_html}`);
     		break;
 
     		case "/index.html":
     		socket.write(htmlContent.index_html);
     		break;
 
-    		case "/styles.css":
+    		case "/css/styles.css":
     		socket.write(htmlContent.styles_css);
     		break;
 
